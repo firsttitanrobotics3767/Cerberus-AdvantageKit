@@ -7,7 +7,7 @@ public interface DrivetrainIO {
     @AutoLog
     public static class DrivetrainIOInputs {
         
-        //add inputs here later
+        
 
     }
 
