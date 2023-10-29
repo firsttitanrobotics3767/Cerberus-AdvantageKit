@@ -6,7 +6,6 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.utils.IDMap.CAN;
 
 public class DrivetrainIOReal implements DrivetrainIO{
@@ -44,6 +43,11 @@ public class DrivetrainIOReal implements DrivetrainIO{
         resetEncoders();
 
         differentialDrive = new DifferentialDrive(leftFront, rightFront);
+
+    }
+
+    @Override
+    public void updateInputs(DriveIOInputs inputs) {
 
     }
 
