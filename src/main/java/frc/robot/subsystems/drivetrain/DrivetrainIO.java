@@ -10,7 +10,12 @@ public interface DrivetrainIO {
         public double leftPositionRadians = 0.0;
         public double leftRadiansPerSecond = 0.0;
         public double leftVolts = 0.0;
-        public double[] leftAps = new double[] {};
+        public double[] leftAmps = new double[] {};
+
+        public double rightPositionRadians = 0.0;
+        public double rightRadiansPerSecond = 0.0;
+        public double rightVolts = 0.0;
+        public double[] rightAmps = new double[] {};
 
     }
 

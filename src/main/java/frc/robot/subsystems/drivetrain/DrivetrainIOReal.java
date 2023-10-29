@@ -5,12 +5,11 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.utils.IDMap.CAN;
 
 public class DrivetrainIOReal implements DrivetrainIO{
-
-    public final DifferentialDrive differentialDrive;
 
     private final CANSparkMax rightFront, leftFront, rightBack, leftBack;
     private final RelativeEncoder rightEncoder, leftEncoder;
@@ -42,26 +41,28 @@ public class DrivetrainIOReal implements DrivetrainIO{
         rightEncoder = rightFront.getEncoder();
         resetEncoders();
 
-        differentialDrive = new DifferentialDrive(leftFront, rightFront);
+    }
+
+    @Override
+    public void updateInputs(DrivetrainIOInputs inputs) {
+
+        inputs.leftPositionRadians = Units.rotationsToRadians(leftEncoder.getPosition());
+        inputs.leftRadiansPerSecond = Units.rotationsPerMinuteToRadiansPerSecond(leftEncoder.getVelocity());
+        inputs.leftVolts = leftFront.getAppliedOutput() * leftFront.getBusVoltage();
+        inputs.leftAmps = new double[] {leftFront.getOutputCurrent(), leftBack.getOutputCurrent()};
+
+        inputs.rightPositionRadians = Units.rotationsToRadians(rightEncoder.getPosition());
+        inputs.rightRadiansPerSecond = Units.rotationsPerMinuteToRadiansPerSecond(leftEncoder.getVelocity());
+        inputs.rightVolts = rightFront.getAppliedOutput() * rightFront.getBusVoltage();
+        inputs.rightAmps = new double[] {rightFront.getOutputCurrent(), rightBack.getOutputCurrent()};
 
     }
 
     @Override
-    public void updateInputs(DriveIOInputs inputs) {
-
-    }
-
-    public void arcadeDrive(double forwardSpeed, double turningSpeed) {
-
-        differentialDrive.arcadeDrive(forwardSpeed, turningSpeed);
-
-    }
-
-    public void tankDriveVolts(double leftVolts, double rightVolts) {
+    public void setVolts(double leftVolts, double rightVolts) {
 
         leftFront.setVoltage(leftVolts);
         rightFront.setVoltage(rightVolts);
-        differentialDrive.feed();
 
     }
 

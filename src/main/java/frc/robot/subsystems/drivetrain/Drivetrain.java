@@ -1,5 +1,7 @@
 package frc.robot.subsystems.drivetrain;
 
+import org.littletonrobotics.junction.Logger;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 
@@ -19,7 +21,10 @@ public class Drivetrain extends SubsystemBase{
 
     @Override
     public void periodic() {
+        
         io.updateInputs(inputs);
+        Logger.processInputs("Drivetrain", inputs);
+
     }
 
 }
