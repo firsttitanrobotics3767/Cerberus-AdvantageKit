@@ -6,64 +6,68 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.utils.IDMap.CAN;
 
 public class DrivetrainIOReal implements DrivetrainIO{
 
-    private final CANSparkMax rightFront, leftFront, rightBack, leftBack;
+    private final CANSparkMax frontRight, frontLeft, backRight, backLeft;
     private final RelativeEncoder rightEncoder, leftEncoder;
 
     
     public DrivetrainIOReal() {
 
-        leftFront = new CANSparkMax(CAN.leftFront.ID, MotorType.kBrushless);
-        leftFront.restoreFactoryDefaults();
-        leftFront.setIdleMode(IdleMode.kBrake);
-        leftFront.setInverted(false);
+        frontLeft = new CANSparkMax(CAN.frontLeft.ID, MotorType.kBrushless);
+        frontLeft.restoreFactoryDefaults();
+        frontLeft.setIdleMode(IdleMode.kBrake);
+        frontLeft.setInverted(false);
+        frontLeft.enableVoltageCompensation(12.0);
+        frontLeft.burnFlash();
 
-        rightFront = new CANSparkMax(CAN.rightFront.ID, MotorType.kBrushless);
-        rightFront.restoreFactoryDefaults();
-        rightFront.setIdleMode(IdleMode.kBrake);
-        rightFront.setInverted(false);
+        frontRight = new CANSparkMax(CAN.backLeft.ID, MotorType.kBrushless);
+        frontRight.restoreFactoryDefaults();
+        frontRight.setIdleMode(IdleMode.kBrake);
+        frontRight.setInverted(true);
+        frontRight.enableVoltageCompensation(12.0);
+        frontRight.burnFlash();
+        
+        backLeft = new CANSparkMax(CAN.frontRight.ID, MotorType.kBrushless);
+        backLeft.restoreFactoryDefaults();
+        backLeft.setIdleMode(IdleMode.kBrake);
+        backLeft.follow(frontLeft);
+        backLeft.enableVoltageCompensation(12.0);
+        backLeft.burnFlash();
 
-        leftBack = new CANSparkMax(CAN.leftBack.ID, MotorType.kBrushless);
-        leftBack.restoreFactoryDefaults();
-        leftBack.setIdleMode(IdleMode.kBrake);
-        leftBack.follow(leftFront);
+        backRight = new CANSparkMax(CAN.backRight.ID, MotorType.kBrushless);
+        backRight.restoreFactoryDefaults();
+        backRight.setIdleMode(IdleMode.kBrake);
+        backRight.follow(frontRight);
+        backRight.enableVoltageCompensation(12.0);
+        backRight.burnFlash();
 
-        rightBack = new CANSparkMax(CAN.rightBack.ID, MotorType.kBrushless);
-        rightBack.restoreFactoryDefaults();
-        rightBack.setIdleMode(IdleMode.kBrake);
-        rightBack.follow(rightFront);
-
-        leftEncoder = leftFront.getEncoder();
-        rightEncoder = rightFront.getEncoder();
+        leftEncoder = frontLeft.getEncoder();
+        rightEncoder = frontRight.getEncoder();
         resetEncoders();
 
     }
 
     @Override
     public void updateInputs(DrivetrainIOInputs inputs) {
+        inputs.leftPositionRads = Units.rotationsToRadians(leftEncoder.getPosition());
+        inputs.leftVelocityRadsPerSec = Units.rotationsPerMinuteToRadiansPerSecond(leftEncoder.getVelocity());
+        inputs.leftVolts = frontLeft.getAppliedOutput() * frontLeft.getBusVoltage();
+        inputs.leftAmps = new double[] {frontLeft.getOutputCurrent(), backLeft.getOutputCurrent()};
 
-        inputs.leftPositionRadians = Units.rotationsToRadians(leftEncoder.getPosition());
-        inputs.leftRadiansPerSecond = Units.rotationsPerMinuteToRadiansPerSecond(leftEncoder.getVelocity());
-        inputs.leftVolts = leftFront.getAppliedOutput() * leftFront.getBusVoltage();
-        inputs.leftAmps = new double[] {leftFront.getOutputCurrent(), leftBack.getOutputCurrent()};
-
-        inputs.rightPositionRadians = Units.rotationsToRadians(rightEncoder.getPosition());
-        inputs.rightRadiansPerSecond = Units.rotationsPerMinuteToRadiansPerSecond(leftEncoder.getVelocity());
-        inputs.rightVolts = rightFront.getAppliedOutput() * rightFront.getBusVoltage();
-        inputs.rightAmps = new double[] {rightFront.getOutputCurrent(), rightBack.getOutputCurrent()};
+        inputs.rightPositionRads = Units.rotationsToRadians(rightEncoder.getPosition());
+        inputs.rightVelocityRadsPerSec = Units.rotationsPerMinuteToRadiansPerSecond(leftEncoder.getVelocity());
+        inputs.rightVolts = frontRight.getAppliedOutput() * frontRight.getBusVoltage();
+        inputs.rightAmps = new double[] {frontRight.getOutputCurrent(), backRight.getOutputCurrent()};
 
     }
 
     @Override
     public void setVolts(double leftVolts, double rightVolts) {
-
-        leftFront.setVoltage(leftVolts);
-        rightFront.setVoltage(rightVolts);
-
+        frontLeft.setVoltage(leftVolts);
+        frontRight.setVoltage(rightVolts);
     }
 
     public void resetEncoders() {

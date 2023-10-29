@@ -9,10 +9,10 @@ public class IDMap {
      */
     public enum CAN {
         // Drivetrain
-        leftFront(1),
-        leftBack(11),
-        rightFront(2),
-        rightBack(21),
+        frontLeft(1),
+        frontRight(11),
+        backLeft(2),
+        backRight(21),
 
         // Pivot
         pivot(3),
