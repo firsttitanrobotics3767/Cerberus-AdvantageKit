@@ -1,5 +1,7 @@
 package frc.robot.subsystems.manipulator;
 
-public class ManipulatorIO {
+public interface ManipulatorIO {
+
+    
     
 }
