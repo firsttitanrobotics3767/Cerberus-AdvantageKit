@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.robot.utils;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -9,17 +9,22 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static final Mode currentMode = Mode.REAL;
+    public static final Mode currentMode = Mode.REAL;
 
-  public static enum Mode {
-    /** Running on a real robot. */
-    REAL,
+    public static final class Drivetrain {
+        public static final double gearRatio = 10.64;
+        public static final double wheelRadius = 2.125;
+    }
 
-    /** Running a physics simulator. */
-    SIM,
+    public static enum Mode {
+        /** Running on a real robot. */
+        REAL,
 
-    /** Replaying from a log file. */
-    REPLAY
-  }
-  //asdf
+        /** Running a physics simulator. */
+        SIM,
+
+        /** Replaying from a log file. */
+        REPLAY
+    }
+  
 }
