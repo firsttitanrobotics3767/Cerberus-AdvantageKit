@@ -45,7 +45,11 @@ public class DrivetrainIOReal implements DrivetrainIO{
         backRight.burnFlash();
 
         leftEncoder = frontLeft.getEncoder();
+        leftEncoder.setPositionConversionFactor(0.09398496240601);
+        leftEncoder.setVelocityConversionFactor(0.09398496240601);
         rightEncoder = frontRight.getEncoder();
+        rightEncoder.setPositionConversionFactor(0.09398496240601);
+        rightEncoder.setVelocityConversionFactor(0.09398496240601);
         resetEncoders();
 
     }

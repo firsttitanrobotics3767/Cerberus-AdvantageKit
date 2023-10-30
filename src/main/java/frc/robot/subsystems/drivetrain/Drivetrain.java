@@ -36,19 +36,19 @@ public class Drivetrain extends SubsystemBase{
     }
 
     public double getLeftPositionMeters() {
-        return inputs.leftPositionRads * Constants.Drivetrain.wheelDiameter;
+        return inputs.leftPositionRads * Constants.Drivetrain.wheelRadius;
     }
 
     public double getRightPositionMeters() {
-        return inputs.rightPositionRads * Constants.Drivetrain.wheelDiameter;
+        return inputs.rightPositionRads * Constants.Drivetrain.wheelRadius;
     }
 
     public double getLeftVelocityMetersPerSec() {
-        return inputs.leftVelocityRadsPerSec * Constants.Drivetrain.wheelDiameter;
+        return inputs.leftVelocityRadsPerSec * Constants.Drivetrain.wheelRadius;
     }
 
     public double getRightVelocityMetersPerSec() {
-        return inputs.rightVelocityRadsPerSec * Constants.Drivetrain.wheelDiameter;
+        return inputs.rightVelocityRadsPerSec * Constants.Drivetrain.wheelRadius;
     }
 
     public Pose2d getPose() {
@@ -56,7 +56,7 @@ public class Drivetrain extends SubsystemBase{
     }
 
     public void SetPose(Pose2d newPose) {
-        // odometry.resetPosition(inputs.gyroYaw, getLeftPositionMeters(), getRightPositionMeters(), newPose);
+        odometry.resetPosition(inputs.gyroYaw, getLeftPositionMeters(), getRightPositionMeters(), newPose);
     }
 
     

@@ -13,7 +13,7 @@ public final class Constants {
 
     public static final class Drivetrain {
         public static final double gearRatio = 10.64;
-        public static final double wheelDiameter = 2.125;
+        public static final double wheelRadius = 2.125;
     }
 
     public static enum Mode {
