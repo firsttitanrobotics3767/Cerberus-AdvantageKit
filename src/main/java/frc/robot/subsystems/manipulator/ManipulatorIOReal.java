@@ -13,6 +13,8 @@ import frc.robot.utils.IDMap;
 
 public class ManipulatorIOReal implements ManipulatorIO {
 
+
+
     private final Compressor compressor;
     private final DoubleSolenoid conicalPincher, wrist;
     private final AddressableLED led;
@@ -38,6 +40,48 @@ public class ManipulatorIOReal implements ManipulatorIO {
         led.start();
         LEDPattern = new int[buffer.getLength()];
 
+    }
+
+    @Override
+    public void updateInputs(ManipulatorIOInputs inputs) {
+        inputs.clawState = getState(conicalPincher);
+        inputs.wristState = getState(wrist);
+    }
+
+    public void openPincher() {
+        conicalPincher.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void closePincher() {
+        conicalPincher.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void togglePincher() {
+        conicalPincher.toggle();
+    }
+
+    public void wristUp() {
+        wrist.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void wristDown() {
+        wrist.set(DoubleSolenoid.Value.kReverse);
+    }
+
+    public void toggleWrist() {
+        wrist.toggle();
+    }
+
+    public PistonState getState(DoubleSolenoid solenoidToGetState) {
+        if (solenoidToGetState.get() == DoubleSolenoid.Value.kForward) {
+            return PistonState.extended;
+        }
+        else if (solenoidToGetState.get() == DoubleSolenoid.Value.kReverse) {
+            return PistonState.retracted;
+        }
+        else {
+            return null;
+        }
     }
 
     // LED Methods
