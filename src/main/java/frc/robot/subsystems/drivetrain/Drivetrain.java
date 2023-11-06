@@ -30,7 +30,7 @@ public class Drivetrain extends SubsystemBase{
         Logger.recordOutput("Odometry", odometry);
     }
 
-    public void ArcadeDrive(double forwardSpeed, double turnSpeed) {
+    public void arcadeDrive(double forwardSpeed, double turnSpeed) {
         var speeds = DifferentialDrive.arcadeDriveIK(forwardSpeed, turnSpeed, true);
         io.setVolts(speeds.left * 12.0, speeds.right * 12.0);
     }

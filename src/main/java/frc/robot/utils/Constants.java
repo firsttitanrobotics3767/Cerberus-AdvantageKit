@@ -16,6 +16,10 @@ public final class Constants {
         public static final double wheelRadius = 2.125;
     }
 
+    public static final class Manipulator {
+        public static final int LEDLength = 17;
+    }
+
     public static enum Mode {
         /** Running on a real robot. */
         REAL,
