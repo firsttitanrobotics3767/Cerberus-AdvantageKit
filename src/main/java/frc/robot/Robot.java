@@ -1,6 +1,5 @@
 package frc.robot;
 
-import frc.robot.utils.Constants;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
 import org.littletonrobotics.junction.Logger;
@@ -9,6 +8,9 @@ import org.littletonrobotics.junction.networktables.NT4Publisher;
 import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 
+import frc.robot.commands.ArcadeDrive;
+import frc.robot.utils.Constants;
+
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -16,6 +18,9 @@ import org.littletonrobotics.junction.wpilog.WPILOGWriter;
  * project.
  */
 public class Robot extends LoggedRobot {
+
+  private RobotContainer m_robotContainer;
+
   private static final String defaultAuto = "Default";
   private static final String customAuto = "My Auto";
   private String autoSelected;
@@ -74,6 +79,8 @@ public class Robot extends LoggedRobot {
     // Start AdvantageKit logger
     Logger.start();
 
+    m_robotContainer = new RobotContainer();
+
     // Initialize auto chooser
     chooser.addDefaultOption("Default Auto", defaultAuto);
     chooser.addOption("My Auto", customAuto);
@@ -106,7 +113,11 @@ public class Robot extends LoggedRobot {
 
   /** This function is called once when teleop is enabled. */
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+
+    m_robotContainer.drivetrain.setDefaultCommand(new ArcadeDrive(() -> -m_robotContainer.driver.getRawAxis(1), () -> -m_robotContainer.driver.getRawAxis(2), m_robotContainer.drivetrain));
+
+  }
 
   /** This function is called periodically during operator control. */
   @Override

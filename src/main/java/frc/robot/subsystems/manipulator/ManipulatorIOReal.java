@@ -50,29 +50,35 @@ public class ManipulatorIOReal implements ManipulatorIO {
     inputs.wristState = getState(wrist);
   }
 
-  public void openPincher() {
-    conicalPincher.set(DoubleSolenoid.Value.kForward);
-  }
+    @Override
+    public void openPincher() {
+        conicalPincher.set(DoubleSolenoid.Value.kForward);
+    }
 
-  public void closePincher() {
-    conicalPincher.set(DoubleSolenoid.Value.kForward);
-  }
+    @Override
+    public void closePincher() {
+        conicalPincher.set(DoubleSolenoid.Value.kForward);
+    }
 
-  public void togglePincher() {
-    conicalPincher.toggle();
-  }
+    @Override
+    public void togglePincher() {
+        conicalPincher.toggle();
+    }
 
-  public void wristUp() {
-    wrist.set(DoubleSolenoid.Value.kForward);
-  }
+    @Override
+    public void wristUp() {
+        wrist.set(DoubleSolenoid.Value.kForward);
+    }
 
-  public void wristDown() {
-    wrist.set(DoubleSolenoid.Value.kReverse);
-  }
+    @Override
+    public void wristDown() {
+        wrist.set(DoubleSolenoid.Value.kReverse);
+    }
 
-  public void toggleWrist() {
-    wrist.toggle();
-  }
+    @Override
+    public void toggleWrist() {
+        wrist.toggle();
+    }
 
   public PistonState getState(DoubleSolenoid solenoidToGetState) {
     if (solenoidToGetState.get() == DoubleSolenoid.Value.kForward) {

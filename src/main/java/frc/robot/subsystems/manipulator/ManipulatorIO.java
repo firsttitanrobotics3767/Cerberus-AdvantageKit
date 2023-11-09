@@ -15,5 +15,18 @@ public interface ManipulatorIO {
     public PistonState clawState;
   }
 
-  public default void updateInputs(ManipulatorIOInputs inputs) {}
+    public default void updateInputs(ManipulatorIOInputs inputs) {}
+
+    public default void openPincher() {}
+
+    public default void closePincher() {}
+
+    public default void togglePincher() {}
+
+    public default void wristUp() {}
+
+    public default void wristDown() {}
+
+    public default void toggleWrist() {}
+
 }

@@ -23,7 +23,32 @@ public class Manipulator extends SubsystemBase {
     return inputs.clawState;
   }
 
-  public PistonState getWristState() {
-    return inputs.wristState;
-  }
+    public PistonState getWristState() {
+        return inputs.wristState;
+    }
+
+    public void openPincher() {
+        io.openPincher();
+    }
+
+    public void closePincher() {
+        io.closePincher();
+    }
+
+    public void togglePincher() {
+        io.togglePincher();
+    }
+
+    public void wristUp() {
+        io.wristUp();
+    }
+
+    public void wristDown() {
+        io.wristDown();
+    }
+
+    public void toggleWrist() {
+        io.toggleWrist();
+    }
+
 }
