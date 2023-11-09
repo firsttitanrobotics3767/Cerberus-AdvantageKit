@@ -21,8 +21,6 @@ public class Robot extends LoggedRobot {
 
   private RobotContainer m_robotContainer;
 
-  private RobotContainer robotContainer;
-
   private static final String defaultAuto = "Default";
   private static final String customAuto = "My Auto";
   private String autoSelected;
@@ -81,7 +79,7 @@ public class Robot extends LoggedRobot {
     // Start AdvantageKit logger
     Logger.start();
 
-    robotContainer = new RobotContainer();
+    m_robotContainer = new RobotContainer();
 
     // Initialize auto chooser
     chooser.addDefaultOption("Default Auto", defaultAuto);
@@ -116,7 +114,7 @@ public class Robot extends LoggedRobot {
   /** This function is called once when teleop is enabled. */
   @Override
   public void teleopInit() {
-    
+
     m_robotContainer.drivetrain.setDefaultCommand(new ArcadeDrive(() -> -m_robotContainer.driver.getRawAxis(1), () -> -m_robotContainer.driver.getRawAxis(2), m_robotContainer.drivetrain));
 
   }

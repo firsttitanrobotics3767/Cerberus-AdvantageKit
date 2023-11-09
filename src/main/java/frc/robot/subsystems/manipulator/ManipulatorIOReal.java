@@ -48,26 +48,32 @@ public class ManipulatorIOReal implements ManipulatorIO {
         inputs.wristState = getState(wrist);
     }
 
+    @Override
     public void openPincher() {
         conicalPincher.set(DoubleSolenoid.Value.kForward);
     }
 
+    @Override
     public void closePincher() {
         conicalPincher.set(DoubleSolenoid.Value.kForward);
     }
 
+    @Override
     public void togglePincher() {
         conicalPincher.toggle();
     }
 
+    @Override
     public void wristUp() {
         wrist.set(DoubleSolenoid.Value.kForward);
     }
 
+    @Override
     public void wristDown() {
         wrist.set(DoubleSolenoid.Value.kReverse);
     }
 
+    @Override
     public void toggleWrist() {
         wrist.toggle();
     }
