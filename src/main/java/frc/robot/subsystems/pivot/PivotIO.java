@@ -11,5 +11,8 @@ public interface PivotIO {
         public double currentAmps = 0.0;
     }
 
+    public default void setPivotVolts(double volts) {}
+
+
     
 }
