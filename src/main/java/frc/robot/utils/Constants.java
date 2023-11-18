@@ -11,7 +11,11 @@ package frc.robot.utils;
 public final class Constants {
   public static final Mode currentMode = Mode.REAL;
 
-  public static final class Drivetrain {
+public static final class Pivot {
+    public static final double degreesPerRevolution = 360;
+}
+
+public static final class Drivetrain {
     public static final double gearRatio = 10.64;
     public static final double wheelRadius = 2.125;
   }
