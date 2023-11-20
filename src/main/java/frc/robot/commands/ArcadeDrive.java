@@ -9,7 +9,7 @@ public class ArcadeDrive extends Command {
   private final Supplier<Double> forwardSpeed, turnSpeed;
 
   public ArcadeDrive(
-      Supplier<Double> forwardSpeed, Supplier<Double> turnSpeed, Drivetrain drivetrain) {
+    Supplier<Double> forwardSpeed, Supplier<Double> turnSpeed, Drivetrain drivetrain) {
     this.drivetrain = drivetrain;
     this.forwardSpeed = forwardSpeed;
     this.turnSpeed = turnSpeed;
