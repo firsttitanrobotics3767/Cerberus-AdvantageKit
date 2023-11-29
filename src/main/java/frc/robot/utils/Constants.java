@@ -9,26 +9,25 @@ package frc.robot.utils;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static final Mode currentMode = Mode.REAL;
+  public static final Mode currentMode = Mode.REAL;
 
-    public static final class Drivetrain {
-        public static final double gearRatio = 10.64;
-        public static final double wheelRadius = 2.125;
-    }
+  public static final class Drivetrain {
+    public static final double gearRatio = 10.64;
+    public static final double wheelRadius = 2.125;
+  }
 
-    public static final class Manipulator {
-        public static final int LEDLength = 17;
-    }
+  public static final class Manipulator {
+    public static final int LEDLength = 17;
+  }
 
-    public static enum Mode {
-        /** Running on a real robot. */
-        REAL,
+  public static enum Mode {
+    /** Running on a real robot. */
+    REAL,
 
-        /** Running a physics simulator. */
-        SIM,
+    /** Running a physics simulator. */
+    SIM,
 
-        /** Replaying from a log file. */
-        REPLAY
-    }
-  
+    /** Replaying from a log file. */
+    REPLAY
+  }
 }
